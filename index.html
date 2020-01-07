@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="#" />
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border-bottom: 1px solid #bebebe;
+            text-align: left;
+            padding: 3px;
+        }
+
+        caption {
+            text-align: right;
+            font-size: 2px;
+            color:#444544;
+        }
+
+        /*tr:nth-child(even) {*/
+        /*    background-color: #dddddd;*/
+        /*}*/
+
+        .box_left_top {
+            float: left;
+            width: 66%;
+            padding: 1px;
+            height: 400px;
+        }
+
+        .box_left_bottom_container {
+            float: left;
+            width: 66%;
+            padding: 1px;
+            height: 400px;
+            clear:none;
+        }
+
+        .box_left_bottom_container.up {
+            float: none;
+            width: 100%;
+            padding: 1px;
+            height: 200px;
+            clear:none;
+        }
+
+        .box_left_bottom_container.down{
+            float: none;
+            width: 100%;
+            padding: 1px;
+            height: 200px;
+            clear:none;
+        }
+
+        .box_right {
+            float: left ;
+            width: 33%;
+            padding: 1px;
+            height: 400px;
+        }
+
+        .box_right_bot {
+            float: left ;
+            width: 33%;
+            padding: 1px;
+            height: 400px;
+            clear: right;
+        }
+
+        .cbox {
+            float: left;
+            width: 13px;
+            height: 13px;
+            margin: 1px;
+            border: 1px solid rgba(0, 0, 0, .2);
+        }
+
+        .solar {
+            background: #f8e71c;
+        }
+
+        .wind {
+            background: #437607;
+        }
+
+        .hydro {
+            background: #4582b4;
+        }
+
+        .gas {
+            background: #fdb462;
+        }
+
+        .dis {
+            background: #f35020;
+        }
+
+        .coal {
+            background: #121212;
+        }
+        .exports {
+            background: #977ab1;
+        }
+
+        .pump {
+            background: #88afd0;
+        }
+
+
+
+    </style>
+</head>
+<body style="font-family:Times New Roman;background-color:#ece9e6;">
+
+<h2><img src="assets/simpson.png" class="pageLogo" style="width:40px;height:40px;"/>&nbsp;&nbsp;Energy&nbsp;&nbsp;&nbsp;&nbsp;SpringField</h2>
+<div class="row1">
+    <div class="box_left_top" style="background-color:#bbb">
+        <h2>Area chart</h2>
+    </div>
+    <div class="box_right" style="background-color:#ece9e6" >
+        <table id="legend_table" style="background-color:#ece9e6;">
+            <caption style="border-bottom: 4px solid #000000;font-size: 25px;color:#444544;"> datetime </caption>
+            <tr>
+                <th>source_name</th>
+                <th>usage <br>
+                    <span style='color:rgba(130, 130, 130, 0.8); font-size: 14px'>MW</span></th>
+                <th>proportion <br>
+                    <span style='color:rgba(130, 130, 130, 0.8); font-size: 14px'>to demand</span></th>
+                <th>Avg. price <br>
+                    <span style='color:rgba(130, 130, 130, 0.8); font-size: 14px'>$/MWh</span></th>
+            </tr>
+            <tr>
+                <td>All sources</td>
+                <td>0</td>
+                <td>-</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td><div class="cbox solar"></div>&nbsp;solar</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><div class="cbox wind"></div>&nbsp;wind</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><div class="cbox hydro"></div>&nbsp;hydro</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><div class="cbox gas"></div>&nbsp;gas</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><div class="cbox dis"></div>&nbsp;distillate</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><div class="cbox coal"></div>&nbsp;black coal</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <th>Loads</th>
+                <td>0</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><div class="cbox exports"></div>&nbsp;Exports</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><div class="cbox pump"></div>&nbsp;Pumps</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <th style="border-bottom: 4px solid #000000;">Net</th>
+                <td style="border-bottom: 4px solid #000000;">0</td>
+                <td style="border-bottom: 4px solid #000000;"></td>
+                <td style="border-bottom: 4px solid #000000;"></td>
+            </tr>
+            <tr>
+                <th style="border-bottom: 4px solid #000000;">Renewables</th>
+                <td style="border-bottom: 4px solid #000000;"></td>
+                <td style="border-bottom: 4px solid #000000;">0%</td>
+                <td style="border-bottom: 4px solid #000000;"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row2">
+    <div class="box_left_bottom_container" style="background-color:#ece9e6">
+        <div class= 'box_left_bottom_container up' style="background-color:#ece9e6">
+            <h3>say something</h3>
+        </div>
+        <div class="box_left_bottom_container down" style="background-color:#ece9e6">
+            <h3>I'm giving upon you</h3>
+        </div>
+    </div>
+    <button id="pie">pie</button>
+    <button id="bar">bar</button>
+    <div class="box_right_bot" style="background-color:#bbb" >
+        <h2>Pie/bar convertible</h2>
+    </div>
+</div>
+
+<script src="charts.js"></script>
+
+</body>
+</html>
